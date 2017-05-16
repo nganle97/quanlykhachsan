@@ -1,0 +1,7 @@
+E:\QLY_KS\DTO\bin\Debug\DTO.exe.config
+E:\QLY_KS\DTO\bin\Debug\DTO.exe
+E:\QLY_KS\DTO\bin\Debug\DTO.pdb
+E:\QLY_KS\DTO\obj\Debug\DTO.Properties.Resources.resources
+E:\QLY_KS\DTO\obj\Debug\DTO.csproj.GenerateResource.Cache
+E:\QLY_KS\DTO\obj\Debug\DTO.exe
+E:\QLY_KS\DTO\obj\Debug\DTO.pdb
