@@ -22,15 +22,17 @@ namespace DATA
                 return instrance;
             }
 
-         private   set
+         private  set
             {
                 DBconection.instrance = value;
             }
         }
 
+        public static DataTable excutequery { get; internal set; }
+
         private DBconection() { }
 
-        private  string ConnectionSTR = @"Data Source=DESKTOP-M8FNLMU\SQLEXPRESS;Initial Catalog=QuanLyKhachSan;Integrated Security=True";
+        private  string ConnectionSTR = @"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyKhachSan;Integrated Security=True";
       
         public  DataTable ExecuteQuery(string query, object[] parameter = null)
         {
@@ -66,9 +68,41 @@ namespace DATA
             return data;
         }
 
-        public  int ExecutenonQuery(string query, object[] parameter = null)
+
+        public int ExecuteNonQuery(string query, object[] parameter = null)
         {
-            int tem = 0;
+            int data = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionSTR))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                if (parameter != null)
+                {
+                    string[] listPara = query.Split(' ');
+                    int i = 0;
+                    foreach (string item in listPara)
+                    {
+                        if (item.Contains('@'))
+                        {
+                            command.Parameters.AddWithValue(item, parameter[i]);
+                            i++;
+                        }
+                    }
+                }
+
+                data = command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            return data;
+        }
+        public object ExecuteSalar(string query, object[] parameter = null)
+        {
+            object ob = 0;
 
             using (SqlConnection connection = new SqlConnection(ConnectionSTR))
             {
@@ -91,13 +125,15 @@ namespace DATA
                 }
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
-                tem = command.ExecuteNonQuery();
+                ob = command.ExecuteNonQuery();
                 connection.Close();
             }
 
-            return tem;// trả về số dòng đc thực thi
+            return ob;// trả về số dòng đc thực thi
             //sd:insert, update, delete
         }
+
+
 
     }
 

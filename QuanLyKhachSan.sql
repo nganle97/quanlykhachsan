@@ -80,8 +80,8 @@ CREATE TABLE HoaDon
 (
 	id INT IDENTITY PRIMARY KEY,
 
-	NgayNhanPhong DATE NOT NULL,
-	NgayTraPhong DATE NOT NULL,
+	NgayNhanPhong DATETIME NOT NULL,
+	NgayTraPhong DATETIME NOT NULL,
 	TongTien FLOAT NOT NULL,
 	TrangThai NVARCHAR(100) NOT NULL DEFAULT N'chua thanh toan', 
 	idphieuthuephong INT ,
@@ -167,6 +167,29 @@ AS
 BEGIN
 	INSERT dbo.thongtintaikhoan VALUES(@userName,@pass,@idnhanvien,@loaitaikhoan)
 END
+GO
+
+CREATE PROC usp_updateAccount
+@userName VARCHAR(100),
+@pass NVARCHAR(100),
+@newpass NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @count INT =1
+	SELECT @count=COUNT(*) FROM dbo.thongtintaikhoan WHERE userName=@userName AND pass=@pass
+	IF(@count=1)
+	UPDATE dbo.thongtintaikhoan SET pass=@newpass WHERE userName=@userName AND pass=@pass
+    
+END
+GO
+EXEC dbo.usp_updateAccount @userName, @pass , @newpass 
+
+SELECT * FROM dbo.thongtintaikhoan
+
+ALTER TABLE dbo.thongtintaikhoan DROP COLUMN displayName 
+
+
+SELECT * FROM dbo.thongtintaikhoan
 GO
 
 CREATE PROC usp_DoiMatkhau
@@ -424,31 +447,43 @@ BEGIN
 END
 GO
 
-ALTER TABLE dbo.khachhang 
-  
-INSERT dbo.HoaDon
-        ( NgayNhanPhong ,
-          NgayTraPhong ,
-          TongTien ,
-          TrangThai ,
-          idphieuthuephong ,
-          idkhachhang ,
-          userName
-        )
-VALUES  ( GETDATE() , -- NgayNhanPhong - date
-          GETDATE() , -- NgayTraPhong - date
-          250000 , -- TongTien - float
-          N'chưa thanh toán' , -- TrangThai - nvarchar(100)
-          1 , -- idphieuthuephong - int
-          1 , -- idkhachhang - int
-          'admin'  -- userName - varchar(100)
-        )
+
+INSERT dbo.HoaDon( NgayNhanPhong ,NgayTraPhong ,TongTien ,TrangThai ,idphieuthuephong ,idkhachhang ,userName)
+VALUES  ( CONVERT(DATETIME,GETDATE()) , CONVERT(DATETIME, GETDATE()) , 250000 , N'chưa thanh toán' , 2 ,  1 ,'admin')
+
+
+INSERT dbo.HoaDon( NgayNhanPhong ,NgayTraPhong ,TongTien ,TrangThai ,idphieuthuephong ,idkhachhang ,userName)
+VALUES  ( CONVERT(DATETIME,GETDATE()) , CONVERT(DATETIME, GETDATE()) , 300000 , N'đã thanh toán' , 3 ,  1 ,'M10')
+
+
+INSERT dbo.HoaDon( NgayNhanPhong ,NgayTraPhong ,TongTien ,TrangThai ,idphieuthuephong ,idkhachhang ,userName)
+VALUES  ( CONVERT(DATETIME,GETDATE()) , CONVERT(DATETIME, GETDATE()) , 400000 , N'chưa thanh toán' , 2 ,  1 ,'admin')
+
+
+INSERT dbo.HoaDon( NgayNhanPhong ,NgayTraPhong ,TongTien ,TrangThai ,idphieuthuephong ,idkhachhang ,userName)
+VALUES  ( CONVERT(DATETIME,GETDATE()) , CONVERT(DATETIME, GETDATE()) , 250000 , N'chưa thanh toán' , 4,  3,'admin')
+
+
+
 SELECT * FROM dbo.HoaDon
 INSERT dbo.phieuthuephong
         ( idphong, ngay_bat_dau_thue )
 VALUES  ( 1, -- idphong - int
           GETDATE()  -- ngay_bat_dau_thue - datetime
           )
+
+INSERT dbo.phieuthuephong
+        ( idphong, ngay_bat_dau_thue )
+VALUES  ( 2, -- idphong - int
+          GETDATE()  -- ngay_bat_dau_thue - datetime
+          )
+
+INSERT dbo.phieuthuephong
+        ( idphong, ngay_bat_dau_thue )
+VALUES  ( 3, -- idphong - int
+          GETDATE()  -- ngay_bat_dau_thue - datetime
+          )
+
 SELECT * FROM dbo.phieuthuephong
 INSERT dbo.Phong
         ( loaiphong, dongia, trangthai )
@@ -456,6 +491,22 @@ VALUES  ( N'thuong ', -- loaiphong - nchar(50)
           200000, -- dongia - float
           N'trống'  -- trangthai - nvarchar(100)
           )
+
+INSERT dbo.Phong
+        ( loaiphong, dongia, trangthai )
+VALUES  ( N'vip', -- loaiphong - nchar(50)
+          40000, -- dongia - float
+          N'trống'  -- trangthai - nvarchar(100)
+          )
+
+INSERT dbo.Phong
+        ( loaiphong, dongia, trangthai )
+VALUES  ( N'vip', -- loaiphong - nchar(50)
+          500000, -- dongia - float
+          N'trống'  -- trangthai - nvarchar(100)
+          )
+
+
 SELECT * FROM dbo.Phong
 GO
 
@@ -478,6 +529,20 @@ VALUES  ( N'nguyễn ngọc tường' , CONVERT(DATETIME,16/05/1996) ,  N'bến 
 INSERT dbo.khachhang
         ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
 VALUES  ( N'trần đức long' ,CONVERT(DATETIME, 30/06/1993 ),  N'vũng tàu' , N'quận 9' , 0971485216 , 102164798 , N'thường ')
+
+
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Nguyễn hữu cảnh' ,CONVERT(DATETIME, 02/06/1995 ),  N'Đồng Nai' , N'Biên Hòa' ,01635207592, 103412128 , N'Đại Gia ')
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Trần Thị Trang' ,CONVERT(DATETIME, 16/10/1990 ),  N'Long An' , N'Dĩ An-Bình Dương' , 0169784514 , 1029871457 , N'thường ')
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Doãn Chí Bình' ,CONVERT(DATETIME, 1/01/1991 ),  N'Sóc Trăng' , N'Quận 1' , 0123486579 , 104797218 , N'Đại Gia ')
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Ngô Thị Hải Yến' ,CONVERT(DATETIME, 23/08/1999 ),  N'vũng tàu' , N'quận 9' , 0971523156 , 102179842 , N'thường ')
 
 
 SELECT * FROM dbo.khachhang
@@ -506,12 +571,29 @@ INSERT dbo.thongtintaikhoan
 VALUES  ( 'admin', -- userName - varchar(100)
           'admin', -- pass - varchar(1000)
           1, -- idNhanVien - int
+          0  ,
+		  )
+GO
+SELECT * FROM dbo.chitiethoadon
+INSERT dbo.thongtintaikhoan
+        ( userName, pass, idNhanVien, loaiTK )
+VALUES  ( 'M10', -- userName - varchar(100)
+          '123', -- pass - varchar(1000)
+          1, -- idNhanVien - int
           0  -- loaiTK - int
           )
+ SELECT * FROM dbo.NhanVienQL         
 SELECT * FROM dbo.thongtintaikhoan WHERE userName='admin' AND pass='admin'
  DECLARE @result INT;
  EXECUTE dbo.usp_kiemtradangnhap @userName = N'admin', -- nvarchar(100)
      @pass = N'admin', -- nvarchar(100)
      @result = @result OUTPUT -- int
+go
 
- 
+SELECT * FROM dbo.Phong
+SELECT * FROM dbo.thongtintaikhoan 
+SELECT * FROM dbo.NhanVienQL
+ SELECT * FROM dbo.HoaDon
+  SELECT * FROM dbo.khachhang
+  SELECT * FROM dbo.phieuthuephong
+  

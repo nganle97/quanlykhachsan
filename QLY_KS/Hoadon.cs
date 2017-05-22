@@ -15,6 +15,8 @@ namespace QLY_KS
         public Hoadon()
         {
             InitializeComponent();
+
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -46,6 +48,16 @@ namespace QLY_KS
         {
             printPreviewDialog1.Document = printDocument1;
             printPreviewDialog1.ShowDialog();
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
 
         }
     }
