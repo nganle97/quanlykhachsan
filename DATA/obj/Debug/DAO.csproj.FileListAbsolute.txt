@@ -6,5 +6,14 @@ E:\QLY_KS\DATA\obj\Debug\DATA.Properties.Resources.resources
 E:\QLY_KS\DATA\obj\Debug\DAO.csproj.GenerateResource.Cache
 E:\QLY_KS\DATA\obj\Debug\DATA.exe
 E:\QLY_KS\DATA\obj\Debug\DATA.pdb
-E:\QLY_KS\DATA\bin\Debug\BUS.exe
-E:\QLY_KS\DATA\bin\Debug\BUS.pdb
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\bin\Debug\DATA.exe.config
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\bin\Debug\DATA.exe
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\bin\Debug\DATA.pdb
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\bin\Debug\DTO.exe
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\bin\Debug\DTO.pdb
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\bin\Debug\DTO.exe.config
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DAO.csprojResolveAssemblyReference.cache
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DATA.Properties.Resources.resources
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DAO.csproj.GenerateResource.Cache
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DATA.exe
+C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DATA.pdb

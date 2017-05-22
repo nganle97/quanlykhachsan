@@ -52,9 +52,16 @@
     <Compile Include="Danhsachphong_DAO.cs" />
     <Compile Include="Datphong_DAO.cs" />
     <Compile Include="DBconection.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hoadon_DAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sodophong.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,9 +85,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BUS\BUS.csproj">
-      <Project>{9F25B3CF-4AC2-4F8E-8D25-7C646201230C}</Project>
-      <Name>BUS</Name>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{cf69e04c-2e7c-4c5b-b465-cde074a28736}</Project>
+      <Name>DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

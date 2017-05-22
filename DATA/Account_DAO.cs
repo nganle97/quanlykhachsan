@@ -1,5 +1,4 @@
-﻿using BUS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -34,29 +33,5 @@ namespace DATA
             DataTable result = DBconection.Instrance.ExecuteQuery(query);
             return result.Rows.Count>0;
         }
-        public int kiemtradangnhap()
-        {
-
-            return  0 ;
-        }
-        public  Account getaccountbyUsername(string username)
-        {
-          
-           DataTable data = DBconection.Instrance.ExecuteQuery("SELECT * FROM dbo.thongtintaikhoan where username='"+username +"'");
-
-            foreach(DataRow item in data.Rows)
-            {
-                return new Account(item);
-            }
-            return null;
-        }
-       
-        public bool doimatkhau(string username, string password, string newpassword)
-        {
-            int result = DBconection.Instrance.ExecuteNonQuery("EXEC dbo.usp_updateAccount @userName , @pass , @newpass ", new object[] { username, password, newpassword });
-
-            return result > 0;
-        }
-      
     }
 }

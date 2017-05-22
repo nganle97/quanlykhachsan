@@ -14,12 +14,13 @@ namespace DTO
         string Sodt;
         string LoaiKH;
         public Khachhang_DTO() { }
-        public Khachhang_DTO(int makh,string tenkh,string socm,string sodt)
+        public Khachhang_DTO(int makh,string tenkh,string socm,string sodt,string Loai)
         {
             this.Tenkh = tenkh;
             this.Makh = makh;
             this.SoCM = socm;
             this.Sodt = sodt;
+            this.LoaiKH = Loai;
 
         }
     }

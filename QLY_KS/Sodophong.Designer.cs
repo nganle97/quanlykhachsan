@@ -210,6 +210,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ghi chú";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // labelControl20
             // 
@@ -263,6 +264,7 @@
             this.simpleButton9.Size = new System.Drawing.Size(135, 62);
             this.simpleButton9.TabIndex = 16;
             this.simpleButton9.Text = "Làm Mới";
+            this.simpleButton9.Click += new System.EventHandler(this.simpleButton9_Click);
             // 
             // panelControl15
             // 
@@ -300,6 +302,7 @@
             this.textBox15.Location = new System.Drawing.Point(78, 40);
             this.textBox15.Multiline = true;
             this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(88, 28);
             this.textBox15.TabIndex = 1;
             // 
@@ -308,6 +311,7 @@
             this.textBox16.Location = new System.Drawing.Point(78, 5);
             this.textBox16.Multiline = true;
             this.textBox16.Name = "textBox16";
+            this.textBox16.ReadOnly = true;
             this.textBox16.Size = new System.Drawing.Size(88, 28);
             this.textBox16.TabIndex = 0;
             // 
@@ -371,6 +375,7 @@
             // 
             // radioButton15
             // 
+            this.radioButton15.AutoCheck = false;
             this.radioButton15.AutoSize = true;
             this.radioButton15.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton15.Location = new System.Drawing.Point(5, 50);
@@ -383,6 +388,7 @@
             // 
             // radioButton16
             // 
+            this.radioButton16.AutoCheck = false;
             this.radioButton16.AutoSize = true;
             this.radioButton16.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton16.Location = new System.Drawing.Point(5, 14);
@@ -630,6 +636,7 @@
             this.textBox7.Location = new System.Drawing.Point(78, 40);
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(88, 28);
             this.textBox7.TabIndex = 1;
             // 
@@ -638,6 +645,7 @@
             this.textBox8.Location = new System.Drawing.Point(78, 5);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(88, 28);
             this.textBox8.TabIndex = 0;
             // 
@@ -844,6 +852,7 @@
             // 
             // radioButton7
             // 
+            this.radioButton7.AutoCheck = false;
             this.radioButton7.AutoSize = true;
             this.radioButton7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton7.Location = new System.Drawing.Point(5, 50);
@@ -856,6 +865,7 @@
             // 
             // radioButton8
             // 
+            this.radioButton8.AutoCheck = false;
             this.radioButton8.AutoSize = true;
             this.radioButton8.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton8.Location = new System.Drawing.Point(5, 14);
@@ -1056,6 +1066,7 @@
             this.Name = "Sodophong";
             this.Text = "Sơ Đồ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Sodophong_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();

@@ -1,5 +1,4 @@
-﻿using BUS;
-using DATA;
+﻿using DATA;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,10 +29,8 @@ namespace QLY_KS
             string password = txtPassWord.Text;
             if(login(username,password))
             {
-                Account acc = Account_DAO.Instance.getaccountbyUsername(username);
-                Form1 f = new Form1(acc);
+                Form1 f = new Form1();
                 this.Hide();
-              
                 f.Show();
           
             }
@@ -61,9 +58,34 @@ namespace QLY_KS
             }
         }
 
-        private void txtPassWord_KeyUp(object sender, KeyEventArgs e)
+        private void txtuserName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void txtuserName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData==Keys.Down)
+            {
+                txtPassWord.Focus();
+            }
+        }
+
+        private void txtPassWord_EditValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtPassWord_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Up)
+            {
+                txtuserName.Focus();
+            }
+            if (e.KeyData == Keys.Enter)
+            {
+                simpleButton1_Click(this, new EventArgs());
+            }
         }
 
         private void dangnhap_KeyUp(object sender, KeyEventArgs e)
@@ -72,43 +94,6 @@ namespace QLY_KS
             {
                 simpleButton1.Select();
             }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-           
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if(checkBox1.Checked==true)
-            {
-                checkBox1.ForeColor = Color.Red;
-                txtPassWord.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                
-
-                 checkBox1.ForeColor = Color.Blue;
-                txtPassWord.UseSystemPasswordChar = true;
-            }
-
-        }
-
-        private void txtPassWord_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPassWord_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
