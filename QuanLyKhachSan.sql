@@ -547,117 +547,24 @@ VALUES  ( 4, -- idphong - int
 SELECT * FROM dbo.phieuthuephong
 GO
 
-INSERT dbo.Phong
-        (tenphong, loaiphong, dongia, trangthai )
-VALUES  ( '101',
-			N'Loại A', -- loaiphong - nchar(50)
-          200000, -- dongia - float
-          N'trống'  -- trangthai - nvarchar(100)
-          )
-
-INSERT dbo.Phong
-        (tenphong, loaiphong, dongia, trangthai )
-VALUES  ( '102',
-			N'Loại A', -- loaiphong - nchar(50)
-          200000, -- dongia - float
-          N'trống'  -- trangthai - nvarchar(100)
-          )
-INSERT dbo.Phong
-        (tenphong, loaiphong, dongia, trangthai )
-VALUES  ( '103',
-			N'Loại A', -- loaiphong - nchar(50)
-          200000, -- dongia - float
-          N'trống'  -- trangthai - nvarchar(100)
-          )
-
-INSERT dbo.Phong
-        (tenphong, loaiphong, dongia, trangthai )
-VALUES  ( '201',
-			N'Loại B', -- loaiphong - nchar(50)
-          300000, -- dongia - float
-          N'trống'  -- trangthai - nvarchar(100)
-          )
-INSERT dbo.Phong
-        (tenphong, loaiphong, dongia, trangthai )
-VALUES  ( '202',
-			N'Loại B', -- loaiphong - nchar(50)
-          300000, -- dongia - float
-          N'trống'  -- trangthai - nvarchar(100)
-          )
-
 SELECT * FROM dbo.Phong
 GO
-
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'lê phú trọng ngân' , '08/08/1997'  , N'ktx khu b' , 016352486591 , 102356201 , N'Nội Địa')
+UPDATE dbo.Phong
+SET tenphong = 'P5' WHERE id=6
 
 
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh  , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'nguyễn văn trạng' , '05/01/1999' , N'dĩ an' , 0968579428 , 10234561 , N'Nội Địa')
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh  , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'võ quốc vương' , CONVERT(DATETIME,23/08/1997) , N'ktx khu b' , 01679112233 , 11236201 , N'Nội Địa')
---chưa insert 
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'nguyễn ngọc tường' , CONVERT(DATETIME,16/05/1996) ,  N'bến tre' , N'thủ đức' , 0907679678 , 102188201 , N'sinh viên')
 
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'trần đức long' ,CONVERT(DATETIME, 30/06/1993 ),  N'vũng tàu' , N'quận 9' , 0971485216 , 102164798 , N'thường ')
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'Nguyễn hữu cảnh' ,CONVERT(DATETIME, 02/06/1995 ),  N'Đồng Nai' , N'Biên Hòa' ,01635207592, 103412128 , N'Đại Gia ')
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'Trần Thị Trang' ,CONVERT(DATETIME, 16/10/1990 ),  N'Long An' , N'Dĩ An-Bình Dương' , 0169784514 , 1029871457 , N'thường ')
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'Doãn Chí Bình' ,CONVERT(DATETIME, 1/01/1991 ),  N'Sóc Trăng' , N'Quận 1' , 0123486579 , 104797218 , N'Đại Gia ')
-INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'Ngô Thị Hải Yến' ,CONVERT(DATETIME, 23/08/1999 ),  N'vũng tàu' , N'quận 9' , 0971523156 , 102179842 , N'thường ')
-
-SELECT * FROM dbo.khachhang
-SELECT * FROM dbo.thongtintaikhoan
-GO
 
 SELECT DISTINCT *  FROM dbo.khachhang 
 DELETE FROM dbo.khachhang WHERE idNKhachHang='2'
 
 GO
 
-INSERT dbo.NhanVienQL
-        ( HoTen, NgaySinh, QueQuan, email, sdt )
-VALUES  ( N'trần văn nhật', -- HoTen - nvarchar(100)
-          CONVERT(DATETIME, 30/06/1989), -- NgaySinh - date
-          N'gia lai', -- QueQuan - nvarchar(100)
-          N'nhat12@gmail.com', -- email - nchar(50)
-          0163524897 -- sdt - float
-          )
+
 SELECT * FROM dbo.NhanVienQL
 
 GO
 
-
-INSERT dbo.thongtintaikhoan
-        ( userName, pass, idNhanVien, loaiTK )
-VALUES  ( 'admin', -- userName - varchar(100)
-          'admin', -- pass - varchar(1000)
-          1, -- idNhanVien - int
-          0  
-		  )
-GO
-SELECT * FROM dbo.chitiethoadon
-INSERT dbo.thongtintaikhoan
-        ( userName, pass, idNhanVien, loaiTK )
-VALUES  ( 'M10', -- userName - varchar(100)
-          '123', -- pass - varchar(1000)
-          1, -- idNhanVien - int
-          0  -- loaiTK - int
-          )
  SELECT * FROM dbo.NhanVienQL         
 SELECT * FROM dbo.thongtintaikhoan WHERE userName='admin' AND pass='admin'
  DECLARE @result INT;
@@ -669,7 +576,7 @@ go
 SELECT * FROM dbo.Phong
 SELECT * FROM dbo.thongtintaikhoan 
 SELECT * FROM dbo.NhanVienQL
- SELECT * FROM dbo.HoaDon
+ 
   SELECT * FROM dbo.khachhang
   SELECT * FROM dbo.phieuthuephong
  
@@ -690,5 +597,25 @@ SELECT * FROM dbo.HoaDon WHERE id=idphieuthuephong AND TrangThai='chua thanh toa
 --ALTER TABLE dbo.Phong ADD Tên Phòng NVARCHAR(100)
 ALTER TABLE dbo.Phong DROP COLUMN[Tên Phòng]
 SELECT idkhachhang FROM dbo.HoaDon
+GO
 
-DELETE dbo.Phong 
+INSERT dbo.HoaDon
+        ( TG_NhanPhong ,
+          TG_TraPhong ,
+          TongTien ,
+          TrangThai ,
+          idphieuthuephong ,
+          idkhachhang ,
+          userName
+        )
+VALUES  ( GETDATE() , -- TG_NhanPhong - datetime
+          GETDATE() , -- TG_TraPhong - datetime
+           , -- TongTien - float
+          N'' , -- TrangThai - nvarchar(100)
+          0 , -- idphieuthuephong - int
+          0 , -- idkhachhang - int
+          ''  -- userName - varchar(100)
+        )
+GO
+SELECT * FROM dbo.Phong
+SELECT hd.id, hd.TG_NhanPhong,hd.TG_TraPhong,hd.TongTien,p.tenphong FROM dbo.HoaDon hd, dbo.phieuthuephong t, dbo.Phong p WHERE hd.idphieuthuephong=t.id AND p.id=t.idphong 
