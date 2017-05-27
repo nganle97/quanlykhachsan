@@ -21,10 +21,10 @@ CREATE TABLE khachhang
 	idNKhachHang INT IDENTITY PRIMARY KEY,
 	HoTen NVARCHAR(100) NOT NULL ,
 	NgaySinh DATE NOT NULL,
-	QueQuan NVARCHAR(100) NOT NULL,
+	
 	Diachi NVARCHAR(100) NOT NULL,
 	sdt FLOAT NOT NULL,
-	So_CMT INT NOT NULL, --số chứng minh thư
+	So_CMT NVARCHAR(100) NOT NULL, --số chứng minh thư
 
 	loaikhachhang NVARCHAR(100) NOT NULL
 )
@@ -32,6 +32,7 @@ GO
 CREATE TABLE Phong
 (
 	id INT IDENTITY PRIMARY KEY,
+	tenphong NVARCHAR(100) NOT NULL,
 	loaiphong NCHAR(50) NOT NULL,
 	dongia FLOAT NOT NULL DEFAULT 0,--giá ban đầu bằng 0
 	trangthai NVARCHAR(100) DEFAULT N'phòng Trống'
@@ -80,8 +81,8 @@ CREATE TABLE HoaDon
 (
 	id INT IDENTITY PRIMARY KEY,
 
-	NgayNhanPhong DATE NOT NULL,
-	NgayTraPhong DATE NOT NULL,
+	TG_NhanPhong DATETIME NOT NULL,--thời gian nhận phòng
+	TG_TraPhong DATETIME NOT NULL,
 	TongTien FLOAT NOT NULL,
 	TrangThai NVARCHAR(100) NOT NULL DEFAULT N'chua thanh toan', 
 	idphieuthuephong INT ,
@@ -169,6 +170,29 @@ BEGIN
 END
 GO
 
+CREATE PROC usp_updateAccount
+@userName VARCHAR(100),
+@pass NVARCHAR(100),
+@newpass NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @count INT =1
+	SELECT @count=COUNT(*) FROM dbo.thongtintaikhoan WHERE userName=@userName AND pass=@pass
+	IF(@count=1)
+	UPDATE dbo.thongtintaikhoan SET pass=@newpass WHERE userName=@userName AND pass=@pass
+    
+END
+GO
+EXEC dbo.usp_updateAccount @userName, @pass , @newpass 
+
+SELECT * FROM dbo.thongtintaikhoan
+
+ALTER TABLE dbo.thongtintaikhoan DROP COLUMN displayName 
+
+
+SELECT * FROM dbo.thongtintaikhoan
+GO
+
 CREATE PROC usp_DoiMatkhau
 @userName NVARCHAR(100), 
 @pass NVARCHAR(100)
@@ -187,15 +211,15 @@ BEGIN
 END
 GO
 
-CREATE PROC usp_themhoadon
-@idphieuthuephong INT,
-@idkhachhang INT ,
-@userName NVARCHAR(100)
+
+--fix
+ALTER PROC usp_themhoadon
+@idhoadon INT 
 AS
 BEGIN
 	INSERT dbo.HoaDon
-	        ( NgayNhanPhong ,
-	          NgayTraPhong ,
+	        ( TG_NhanPhong ,
+	          TG_TraPhong ,
 	          TongTien ,
 	          TrangThai ,
 	          idkhachhang ,
@@ -203,14 +227,16 @@ BEGIN
 	        )
 	VALUES  ( GETDATE() , -- NgayNhanPhong - date
 	          GETDATE() , -- NgayTraPhong - date
-	          0.0 , -- TongTien - float
-	          N'' , -- TrangThai - nvarchar(100)
-	          0 , -- idkhachhang - int
-	          ''  -- userName - varchar(100)
+	          30000 , -- TongTien - float
+	          N'đã thanh toán' , -- TrangThai - nvarchar(100)
+	          1 , -- idkhachhang - int
+	          'M10'  -- userName - varchar(100)
 	        )
 	         
 END 
 GO
+EXEC dbo.usp_themhoadon @idhoadon
+SELECT MAX(id) FROM dbo.HoaDon
 
 CREATE PROC usp_themCTHD
 @idhoahon INT ,
@@ -255,6 +281,28 @@ BEGIN
 	DROP TABLE dbo.HoaDon
 END
 GO
+--tính số hóa đơn by ngày
+CREATE PROC StoredProcedure_laySoHoaDonDTT
+@dateIn DATE, @dateOut DATE
+AS
+BEGIN
+	SELECT COUNT(*)
+	FROM dbo.HoaDon AS b, dbo.BanAn AS t
+	WHERE b.ngayDen >= @dateIn AND b.ngayDen <= @dateOut AND b.trangThai = N'Đã thanh toán'
+	AND t.idBanAn = b.idBanAn 
+END
+GO
+--
+CREATE PROC usp_tinhsohoadon
+@DateIn DATETIME,
+@DateOut DATETIME
+AS
+BEGIN
+	SELECT COUNT(*) FROM dbo.HoaDon AS h, dbo.phieuthuephong AS p WHERE h.TG_nhanphong>=@DateIn AND h.TG_traphong<=@DateOut AND h.TrangThai='đã thanh toán'
+	AND h.idphieuthuephong=p.id
+END
+GO
+EXEC dbo.usp_tinhsohoadon @DateIn, @DateOut 
 
 --sửa hóa đơn
 --tìm hóa đơn chưa song 
@@ -276,14 +324,14 @@ SELECT * FROM dbo.HoaDon
 CREATE PROC usp_timkhachhang
 @idKhachhang INT =0 OUTPUT,
 @SoCMT INT ,
-@hoten NVARCHAR(100),
-@quequan NVARCHAR(100)
+@hoten NVARCHAR(100)
+
 AS
 BEGIN
 		
 		SELECT @idKhachhang=idNKhachHang 
 		 FROM dbo.khachhang
-		 WHERE So_CMT=@SoCMT AND HoTen=@hoten AND QueQuan=@quequan
+		 WHERE So_CMT=@SoCMT AND HoTen=@hoten 
 		 IF(@idKhachhang>0)
 		 RETURN
 		 SET @idKhachhang=0
@@ -304,6 +352,22 @@ BEGIN
 		SELECT SUM(TongTien) FROM dbo.HoaDon WHERE TrangThai='đã thanh toán'
 END
 GO
+
+CREATE PROC usp_updatehoadon
+@idhoadon INT ,
+@tongtien FLOAT, 
+@trangthai NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @count INT =0
+	SELECT @count=COUNT(*) FROM dbo.HoaDon WHERE id=@idhoadon  
+	IF(@count>0)
+	UPDATE dbo.HoaDon SET TG_TraPhong=GETDATE(), TongTien=@tongtien, TrangThai='chua thanh toan' WHERE id=@idhoadon
+END
+GO
+EXEC dbo.usp_updatehoadon @idhoadon = 0,@tongtien = 0.0, @trangthai = N'' 
+
+
 
 
 CREATE TRIGGER tg_update_hoadon
@@ -424,53 +488,118 @@ BEGIN
 END
 GO
 
-ALTER TABLE dbo.khachhang 
-  
+
 INSERT dbo.HoaDon
-        ( NgayNhanPhong ,
-          NgayTraPhong ,
+        (TG_NhanPhong ,
+          TG_TraPhong ,
           TongTien ,
           TrangThai ,
           idphieuthuephong ,
           idkhachhang ,
           userName
         )
-VALUES  ( GETDATE() , -- NgayNhanPhong - date
-          GETDATE() , -- NgayTraPhong - date
-          250000 , -- TongTien - float
-          N'chưa thanh toán' , -- TrangThai - nvarchar(100)
-          1 , -- idphieuthuephong - int
+VALUES  ( GETDATE() , -- NgayNhanPhong - datetime
+          GETDATE() , -- NgayTraPhong - datetime
+          400000 , -- TongTien - float
+          N'chua thanh toan' , -- TrangThai - nvarchar(100)
+          2, -- idphieuthuephong - int
           1 , -- idkhachhang - int
           'admin'  -- userName - varchar(100)
         )
+
+INSERT dbo.HoaDon
+        (TG_NhanPhong ,
+          TG_TraPhong ,
+          TongTien ,
+          TrangThai ,
+          idphieuthuephong ,
+          idkhachhang ,
+          userName
+        )
+VALUES  ( GETDATE() , -- NgayNhanPhong - datetime
+          GETDATE() , -- NgayTraPhong - datetime
+          300000 , -- TongTien - float
+          N'chua thanh toan' , -- TrangThai - nvarchar(100)
+          2, -- idphieuthuephong - int
+          2 , -- idkhachhang - int
+          'M10'  -- userName - varchar(100)
+        )
+
 SELECT * FROM dbo.HoaDon
 INSERT dbo.phieuthuephong
         ( idphong, ngay_bat_dau_thue )
-VALUES  ( 1, -- idphong - int
+VALUES  ( 2, -- idphong - int
           GETDATE()  -- ngay_bat_dau_thue - datetime
           )
+
+INSERT dbo.phieuthuephong
+        ( idphong, ngay_bat_dau_thue )
+VALUES  ( 3, -- idphong - int
+          GETDATE()  -- ngay_bat_dau_thue - datetime
+          )
+
+INSERT dbo.phieuthuephong
+        ( idphong, ngay_bat_dau_thue )
+VALUES  ( 4, -- idphong - int
+          GETDATE()  -- ngay_bat_dau_thue - datetime
+          )
+
 SELECT * FROM dbo.phieuthuephong
+GO
+
 INSERT dbo.Phong
-        ( loaiphong, dongia, trangthai )
-VALUES  ( N'thuong ', -- loaiphong - nchar(50)
+        (tenphong, loaiphong, dongia, trangthai )
+VALUES  ( '101',
+			N'Loại A', -- loaiphong - nchar(50)
           200000, -- dongia - float
           N'trống'  -- trangthai - nvarchar(100)
           )
+
+INSERT dbo.Phong
+        (tenphong, loaiphong, dongia, trangthai )
+VALUES  ( '102',
+			N'Loại A', -- loaiphong - nchar(50)
+          200000, -- dongia - float
+          N'trống'  -- trangthai - nvarchar(100)
+          )
+INSERT dbo.Phong
+        (tenphong, loaiphong, dongia, trangthai )
+VALUES  ( '103',
+			N'Loại A', -- loaiphong - nchar(50)
+          200000, -- dongia - float
+          N'trống'  -- trangthai - nvarchar(100)
+          )
+
+INSERT dbo.Phong
+        (tenphong, loaiphong, dongia, trangthai )
+VALUES  ( '201',
+			N'Loại B', -- loaiphong - nchar(50)
+          300000, -- dongia - float
+          N'trống'  -- trangthai - nvarchar(100)
+          )
+INSERT dbo.Phong
+        (tenphong, loaiphong, dongia, trangthai )
+VALUES  ( '202',
+			N'Loại B', -- loaiphong - nchar(50)
+          300000, -- dongia - float
+          N'trống'  -- trangthai - nvarchar(100)
+          )
+
 SELECT * FROM dbo.Phong
 GO
 
 INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'lê phú trọng ngân' , '08/08/1997' ,  N'bình định' , N'ktx khu b' , 016352486591 , 102356201 , N'sinh viên')
+        ( HoTen , NgaySinh , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'lê phú trọng ngân' , '08/08/1997'  , N'ktx khu b' , 016352486591 , 102356201 , N'Nội Địa')
 
 
 INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'nguyễn văn trạng' , '05/01/1999' ,  N'bình dương' , N'dĩ an' , 0968579428 , 10234561 , N'học sinh')
+        ( HoTen , NgaySinh  , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'nguyễn văn trạng' , '05/01/1999' , N'dĩ an' , 0968579428 , 10234561 , N'Nội Địa')
 INSERT dbo.khachhang
-        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
-VALUES  ( N'võ quốc vương' , CONVERT(DATETIME,23/08/1997) ,  N'bình định' , N'ktx khu b' , 01679112233 , 11236201 , N'sinh viên')
-
+        ( HoTen , NgaySinh  , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'võ quốc vương' , CONVERT(DATETIME,23/08/1997) , N'ktx khu b' , 01679112233 , 11236201 , N'Nội Địa')
+--chưa insert 
 INSERT dbo.khachhang
         ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
 VALUES  ( N'nguyễn ngọc tường' , CONVERT(DATETIME,16/05/1996) ,  N'bến tre' , N'thủ đức' , 0907679678 , 102188201 , N'sinh viên')
@@ -478,9 +607,21 @@ VALUES  ( N'nguyễn ngọc tường' , CONVERT(DATETIME,16/05/1996) ,  N'bến 
 INSERT dbo.khachhang
         ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
 VALUES  ( N'trần đức long' ,CONVERT(DATETIME, 30/06/1993 ),  N'vũng tàu' , N'quận 9' , 0971485216 , 102164798 , N'thường ')
-
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Nguyễn hữu cảnh' ,CONVERT(DATETIME, 02/06/1995 ),  N'Đồng Nai' , N'Biên Hòa' ,01635207592, 103412128 , N'Đại Gia ')
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Trần Thị Trang' ,CONVERT(DATETIME, 16/10/1990 ),  N'Long An' , N'Dĩ An-Bình Dương' , 0169784514 , 1029871457 , N'thường ')
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Doãn Chí Bình' ,CONVERT(DATETIME, 1/01/1991 ),  N'Sóc Trăng' , N'Quận 1' , 0123486579 , 104797218 , N'Đại Gia ')
+INSERT dbo.khachhang
+        ( HoTen , NgaySinh ,QueQuan , Diachi ,sdt , So_CMT , loaikhachhang )
+VALUES  ( N'Ngô Thị Hải Yến' ,CONVERT(DATETIME, 23/08/1999 ),  N'vũng tàu' , N'quận 9' , 0971523156 , 102179842 , N'thường ')
 
 SELECT * FROM dbo.khachhang
+SELECT * FROM dbo.thongtintaikhoan
 GO
 
 SELECT DISTINCT *  FROM dbo.khachhang 
@@ -506,31 +647,48 @@ INSERT dbo.thongtintaikhoan
 VALUES  ( 'admin', -- userName - varchar(100)
           'admin', -- pass - varchar(1000)
           1, -- idNhanVien - int
+          0  
+		  )
+GO
+SELECT * FROM dbo.chitiethoadon
+INSERT dbo.thongtintaikhoan
+        ( userName, pass, idNhanVien, loaiTK )
+VALUES  ( 'M10', -- userName - varchar(100)
+          '123', -- pass - varchar(1000)
+          1, -- idNhanVien - int
           0  -- loaiTK - int
           )
+ SELECT * FROM dbo.NhanVienQL         
 SELECT * FROM dbo.thongtintaikhoan WHERE userName='admin' AND pass='admin'
  DECLARE @result INT;
  EXECUTE dbo.usp_kiemtradangnhap @userName = N'admin', -- nvarchar(100)
      @pass = N'admin', -- nvarchar(100)
      @result = @result OUTPUT -- int
+go
 
+SELECT * FROM dbo.Phong
+SELECT * FROM dbo.thongtintaikhoan 
+SELECT * FROM dbo.NhanVienQL
+ SELECT * FROM dbo.HoaDon
+  SELECT * FROM dbo.khachhang
+  SELECT * FROM dbo.phieuthuephong
  
- UPDATE dbo.Phong
- set trangthai = N'co khách'
- where id = 6
  
- go
- alter proc USP_getroms
- AS select * from dbo.Phong
- go 
- EXEC USP_getroms
- go
- select * from dbo.khachhang
- go
+GO
+Alter TABLE dbo.khachhang
 
- select * from dbo.Phong where loaiphong = N'A' and trangthai = N'phòng Trống'
- select * from dbo.Phong where loaiphong = N'A' 
- select * from dbo.Phong where trangthai = N'phòng Trống'
- select * from dbo.khachhang where So_CMT = 01234
- select * from dbo.khachhang where loaikhachhang = 'A'
- select * from dbo.khachhang where loaikhachhang = 'A' and So_CMT = 120
+alter COLUMN sdt NVARCHAR(100)
+CREATE PROC usp_getuncheckbillidbyifRom
+@id INT,
+@trangthai NVARCHAR(100)
+BEGIN
+	SELECT * FROM dbo.HoaDon WHERE id=@id AND TrangThai='chưa thanh toán'
+END
+GO
+
+SELECT * FROM dbo.HoaDon WHERE id=idphieuthuephong AND TrangThai='chua thanh toan'
+--ALTER TABLE dbo.Phong ADD Tên Phòng NVARCHAR(100)
+ALTER TABLE dbo.Phong DROP COLUMN[Tên Phòng]
+SELECT idkhachhang FROM dbo.HoaDon
+
+DELETE dbo.Phong 

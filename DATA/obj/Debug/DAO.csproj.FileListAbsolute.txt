@@ -17,3 +17,8 @@ C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DATA.Properties.Re
 C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DAO.csproj.GenerateResource.Cache
 C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DATA.exe
 C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DATA\obj\Debug\DATA.pdb
+C:\Users\ngan\Desktop\githubQLKS\quanlykhachsan\quanlykhachsan\DATA\obj\Debug\DAO.csprojResolveAssemblyReference.cache
+C:\Users\ngan\Desktop\githubQLKS\quanlykhachsan\quanlykhachsan\DATA\obj\Debug\DATA.Properties.Resources.resources
+C:\Users\ngan\Desktop\githubQLKS\quanlykhachsan\quanlykhachsan\DATA\obj\Debug\DAO.csproj.GenerateResource.Cache
+C:\Users\ngan\Desktop\githubQLKS\quanlykhachsan\quanlykhachsan\DATA\obj\Debug\DATA.exe
+C:\Users\ngan\Desktop\githubQLKS\quanlykhachsan\quanlykhachsan\DATA\obj\Debug\DATA.pdb
