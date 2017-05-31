@@ -57,8 +57,8 @@
             this.txtPassW = new System.Windows.Forms.TextBox();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReEnterPassWord.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -175,6 +175,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(442, 246);
             this.panel3.TabIndex = 2;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // simpleButton2
             // 
@@ -317,11 +318,6 @@
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
             this.ribbonStatusBar1.Size = new System.Drawing.Size(445, 31);
             // 
-            // ribbonPage3
-            // 
-            this.ribbonPage3.Name = "ribbonPage3";
-            this.ribbonPage3.Text = "ribbonPage3";
-            // 
             // ribbonControl1
             // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
@@ -333,6 +329,11 @@
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
             this.ribbonControl1.Size = new System.Drawing.Size(445, 49);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
+            // 
+            // ribbonPage3
+            // 
+            this.ribbonPage3.Name = "ribbonPage3";
+            this.ribbonPage3.Text = "ribbonPage3";
             // 
             // fUpdateAccount
             // 

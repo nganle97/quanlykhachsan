@@ -97,5 +97,10 @@ namespace QLY_KS
         {
             UpdateAccount();
         }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

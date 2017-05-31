@@ -5,11 +5,4 @@ E:\QLY_KS\DTO\obj\Debug\DTO.Properties.Resources.resources
 E:\QLY_KS\DTO\obj\Debug\DTO.csproj.GenerateResource.Cache
 E:\QLY_KS\DTO\obj\Debug\DTO.exe
 E:\QLY_KS\DTO\obj\Debug\DTO.pdb
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\bin\Debug\DTO.exe.config
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\bin\Debug\DTO.exe
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\bin\Debug\DTO.pdb
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\obj\Debug\DTO.Properties.Resources.resources
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\obj\Debug\DTO.csproj.GenerateResource.Cache
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\obj\Debug\DTO.exe
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\DTO\obj\Debug\DTO.pdb
+E:\QLY_KS\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache

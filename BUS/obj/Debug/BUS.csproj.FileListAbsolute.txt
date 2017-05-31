@@ -6,11 +6,3 @@ E:\QLY_KS\BUS\obj\Debug\BUS.Properties.Resources.resources
 E:\QLY_KS\BUS\obj\Debug\BUS.csproj.GenerateResource.Cache
 E:\QLY_KS\BUS\obj\Debug\BUS.exe
 E:\QLY_KS\BUS\obj\Debug\BUS.pdb
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\bin\Debug\BUS.exe.config
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\bin\Debug\BUS.exe
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\bin\Debug\BUS.pdb
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\obj\Debug\BUS.csprojResolveAssemblyReference.cache
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\obj\Debug\BUS.Properties.Resources.resources
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\obj\Debug\BUS.csproj.GenerateResource.Cache
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\obj\Debug\BUS.exe
-C:\Users\Tranguit\Desktop\trang\quanlykhachsan\BUS\obj\Debug\BUS.pdb

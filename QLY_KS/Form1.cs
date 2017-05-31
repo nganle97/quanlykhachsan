@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BUS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,9 +12,25 @@ namespace QLY_KS
 {
     public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public Form1()
+        private Account loginAccount;
+
+        public Account LoginAccount
+        {
+            get
+            {
+                return loginAccount;
+            }
+
+            set
+            {
+                loginAccount = value;
+
+            }
+        }
+        public Form1(Account acc)
         {
             InitializeComponent();
+            this.LoginAccount = acc;
         }
         private bool checkform(string nameform)
         {
@@ -131,6 +148,19 @@ namespace QLY_KS
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+     
+
+        private void barBtnInfAccount_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+           fUpdateAccount inf = new fUpdateAccount(LoginAccount);
+         
+            inf.Show();
+        }
+
+        private void ribbonControl1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

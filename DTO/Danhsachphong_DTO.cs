@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class Danhsachphong_DTO
+    public class Danhsachphong_DTO
     {
+        
     }
 }

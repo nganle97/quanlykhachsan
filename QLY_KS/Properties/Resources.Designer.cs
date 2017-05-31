@@ -179,5 +179,15 @@ namespace QLY_KS.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Office_Customer_Male_Light_icon {
+            get {
+                object obj = ResourceManager.GetObject("Office-Customer-Male-Light-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

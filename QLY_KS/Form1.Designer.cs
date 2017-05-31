@@ -29,38 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.rbQuanLy = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.rbbQualyphong = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.barbtnsodophong = new DevExpress.XtraBars.BarButtonItem();
             this.barbtnds = new DevExpress.XtraBars.BarButtonItem();
             this.barbtnDatp = new DevExpress.XtraBars.BarButtonItem();
+            this.ribnQLkh = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.barbtnDanhSachkh = new DevExpress.XtraBars.BarButtonItem();
+            this.ribHoadon = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.barbtnHoadon = new DevExpress.XtraBars.BarButtonItem();
             this.barbtnBaocao = new DevExpress.XtraBars.BarButtonItem();
-            this.rbQuanLy = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.rbbQualyphong = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribnQLkh = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribHoadon = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribInfAccount = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barBtnInfAccount = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
-            // ribbonControl1
+            // rbQuanLy
             // 
-            this.ribbonControl1.AutoSizeItems = true;
-            this.ribbonControl1.ExpandCollapseItem.Id = 0;
-            this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.ribbonControl1.ExpandCollapseItem,
-            this.barbtnsodophong,
-            this.barbtnds,
-            this.barbtnDatp,
-            this.barbtnDanhSachkh,
-            this.barbtnHoadon,
-            this.barbtnBaocao});
-            this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 10;
-            this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.rbQuanLy});
-            this.ribbonControl1.Size = new System.Drawing.Size(836, 143);
+            this.rbQuanLy.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.rbbQualyphong,
+            this.ribnQLkh,
+            this.ribHoadon,
+            this.ribInfAccount});
+            this.rbQuanLy.Name = "rbQuanLy";
+            this.rbQuanLy.Text = "Quản Lý";
+            // 
+            // rbbQualyphong
+            // 
+            this.rbbQualyphong.AllowTextClipping = false;
+            this.rbbQualyphong.ItemLinks.Add(this.barbtnsodophong);
+            this.rbbQualyphong.ItemLinks.Add(this.barbtnds);
+            this.rbbQualyphong.ItemLinks.Add(this.barbtnDatp);
+            this.rbbQualyphong.Name = "rbbQualyphong";
+            this.rbbQualyphong.Text = "Quản Lý Phòng";
             // 
             // barbtnsodophong
             // 
@@ -90,6 +93,12 @@
             this.barbtnDatp.Name = "barbtnDatp";
             this.barbtnDatp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barbtnDatp_ItemClick);
             // 
+            // ribnQLkh
+            // 
+            this.ribnQLkh.ItemLinks.Add(this.barbtnDanhSachkh);
+            this.ribnQLkh.Name = "ribnQLkh";
+            this.ribnQLkh.Text = "Quản Lý Khách Hàng";
+            // 
             // barbtnDanhSachkh
             // 
             this.barbtnDanhSachkh.Caption = "Danh Sách Khách Hàng";
@@ -98,6 +107,13 @@
             this.barbtnDanhSachkh.LargeWidth = 200;
             this.barbtnDanhSachkh.Name = "barbtnDanhSachkh";
             this.barbtnDanhSachkh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barbtnDanhSachkh_ItemClick);
+            // 
+            // ribHoadon
+            // 
+            this.ribHoadon.ItemLinks.Add(this.barbtnHoadon);
+            this.ribHoadon.ItemLinks.Add(this.barbtnBaocao);
+            this.ribHoadon.Name = "ribHoadon";
+            this.ribHoadon.Text = "Hóa Đơn Và Báo Cáo";
             // 
             // barbtnHoadon
             // 
@@ -116,43 +132,57 @@
             this.barbtnBaocao.Name = "barbtnBaocao";
             this.barbtnBaocao.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barbtnBaocao_ItemClick);
             // 
-            // rbQuanLy
+            // ribInfAccount
             // 
-            this.rbQuanLy.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.rbbQualyphong,
-            this.ribnQLkh,
-            this.ribHoadon});
-            this.rbQuanLy.Name = "rbQuanLy";
-            this.rbQuanLy.Text = "Quản Lý";
+            this.ribInfAccount.AllowMinimize = false;
+            this.ribInfAccount.Glyph = global::QLY_KS.Properties.Resources.Office_Customer_Male_Light_icon;
+            this.ribInfAccount.ItemLinks.Add(this.barBtnInfAccount);
+            this.ribInfAccount.Name = "ribInfAccount";
+            this.ribInfAccount.Text = "Thông tin tài khoản";
             // 
-            // rbbQualyphong
+            // barBtnInfAccount
             // 
-            this.rbbQualyphong.AllowTextClipping = false;
-            this.rbbQualyphong.ItemLinks.Add(this.barbtnsodophong);
-            this.rbbQualyphong.ItemLinks.Add(this.barbtnds);
-            this.rbbQualyphong.ItemLinks.Add(this.barbtnDatp);
-            this.rbbQualyphong.Name = "rbbQualyphong";
-            this.rbbQualyphong.Text = "Quản Lý Phòng";
+            this.barBtnInfAccount.Caption = "Thông tin tài khoản";
+            this.barBtnInfAccount.Id = 13;
+            this.barBtnInfAccount.ImageOptions.LargeImage = global::QLY_KS.Properties.Resources.Office_Customer_Male_Light_icon;
+            this.barBtnInfAccount.LargeWidth = 110;
+            this.barBtnInfAccount.Name = "barBtnInfAccount";
+            this.barBtnInfAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnInfAccount_ItemClick);
             // 
-            // ribnQLkh
+            // barButtonItem1
             // 
-            this.ribnQLkh.ItemLinks.Add(this.barbtnDanhSachkh);
-            this.ribnQLkh.Name = "ribnQLkh";
-            this.ribnQLkh.Text = "Quản Lý Khách Hàng";
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 12;
+            this.barButtonItem1.Name = "barButtonItem1";
             // 
-            // ribHoadon
+            // ribbonControl1
             // 
-            this.ribHoadon.ItemLinks.Add(this.barbtnHoadon);
-            this.ribHoadon.ItemLinks.Add(this.barbtnBaocao);
-            this.ribHoadon.Name = "ribHoadon";
-            this.ribHoadon.Text = "Hóa Đơn Và Báo Cáo";
+            this.ribbonControl1.AutoSizeItems = true;
+            this.ribbonControl1.ExpandCollapseItem.Id = 0;
+            this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.ribbonControl1.ExpandCollapseItem,
+            this.barbtnsodophong,
+            this.barbtnds,
+            this.barbtnDatp,
+            this.barbtnDanhSachkh,
+            this.barbtnHoadon,
+            this.barbtnBaocao,
+            this.barButtonItem1,
+            this.barBtnInfAccount});
+            this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
+            this.ribbonControl1.MaxItemId = 14;
+            this.ribbonControl1.Name = "ribbonControl1";
+            this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.rbQuanLy});
+            this.ribbonControl1.Size = new System.Drawing.Size(798, 143);
+            this.ribbonControl1.Click += new System.EventHandler(this.ribbonControl1_Click);
             // 
             // Form1
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 429);
+            this.ClientSize = new System.Drawing.Size(798, 429);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -170,17 +200,20 @@
 
         #endregion
 
-        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage rbQuanLy;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbbQualyphong;
         private DevExpress.XtraBars.BarButtonItem barbtnsodophong;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribnQLkh;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribHoadon;
         private DevExpress.XtraBars.BarButtonItem barbtnds;
         private DevExpress.XtraBars.BarButtonItem barbtnDatp;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribnQLkh;
         private DevExpress.XtraBars.BarButtonItem barbtnDanhSachkh;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribHoadon;
         private DevExpress.XtraBars.BarButtonItem barbtnHoadon;
         private DevExpress.XtraBars.BarButtonItem barbtnBaocao;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribInfAccount;
+        private DevExpress.XtraBars.BarButtonItem barBtnInfAccount;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
     }
 }
 

@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbcUserName = new DevExpress.XtraEditors.LabelControl();
             this.txtuserName = new DevExpress.XtraEditors.TextEdit();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtPassWord = new System.Windows.Forms.TextBox();
             this.lbcPassWord = new DevExpress.XtraEditors.LabelControl();
-            this.txtPassWord = new DevExpress.XtraEditors.TextEdit();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -47,24 +48,36 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtuserName.Properties)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPassWord.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.simpleButton2);
             this.panel1.Controls.Add(this.simpleButton1);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Location = new System.Drawing.Point(8, 33);
+            this.panel1.Location = new System.Drawing.Point(12, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(402, 149);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(205, 93);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(114, 18);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Show PassWord";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(275, 96);
+            this.simpleButton2.Location = new System.Drawing.Point(275, 117);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(84, 32);
             this.simpleButton2.TabIndex = 3;
@@ -73,7 +86,7 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(161, 96);
+            this.simpleButton1.Location = new System.Drawing.Point(161, 117);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(85, 32);
             this.simpleButton1.TabIndex = 2;
@@ -101,21 +114,29 @@
             // 
             // txtuserName
             // 
+            this.txtuserName.EditValue = "admin";
             this.txtuserName.Location = new System.Drawing.Point(143, 11);
             this.txtuserName.Name = "txtuserName";
             this.txtuserName.Size = new System.Drawing.Size(210, 20);
             this.txtuserName.TabIndex = 0;
-            this.txtuserName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtuserName_KeyPress);
-            this.txtuserName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtuserName_KeyUp);
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.lbcPassWord);
             this.panel3.Controls.Add(this.txtPassWord);
+            this.panel3.Controls.Add(this.lbcPassWord);
             this.panel3.Location = new System.Drawing.Point(3, 43);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(396, 47);
             this.panel3.TabIndex = 1;
+            // 
+            // txtPassWord
+            // 
+            this.txtPassWord.Location = new System.Drawing.Point(146, 11);
+            this.txtPassWord.Name = "txtPassWord";
+            this.txtPassWord.Size = new System.Drawing.Size(210, 21);
+            this.txtPassWord.TabIndex = 2;
+            this.txtPassWord.UseSystemPasswordChar = true;
+            this.txtPassWord.TextChanged += new System.EventHandler(this.txtPassWord_TextChanged);
             // 
             // lbcPassWord
             // 
@@ -126,16 +147,6 @@
             this.lbcPassWord.Size = new System.Drawing.Size(100, 22);
             this.lbcPassWord.TabIndex = 1;
             this.lbcPassWord.Text = "Password:";
-            // 
-            // txtPassWord
-            // 
-            this.txtPassWord.Location = new System.Drawing.Point(146, 14);
-            this.txtPassWord.Name = "txtPassWord";
-            this.txtPassWord.Properties.PasswordChar = '*';
-            this.txtPassWord.Size = new System.Drawing.Size(210, 20);
-            this.txtPassWord.TabIndex = 1;
-            this.txtPassWord.EditValueChanged += new System.EventHandler(this.txtPassWord_EditValueChanged);
-            this.txtPassWord.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassWord_KeyUp);
             // 
             // ribbonControl1
             // 
@@ -206,12 +217,12 @@
             this.Load += new System.EventHandler(this.dangnhap_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dangnhap_KeyUp);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtuserName.Properties)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPassWord.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -225,7 +236,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraEditors.LabelControl lbcPassWord;
-        private DevExpress.XtraEditors.TextEdit txtPassWord;
         private System.Windows.Forms.Panel panel2;
         private DevExpress.XtraEditors.LabelControl lbcUserName;
         private DevExpress.XtraEditors.TextEdit txtuserName;
@@ -235,5 +245,9 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox txtPassWord;
+
+       
     }
 }
